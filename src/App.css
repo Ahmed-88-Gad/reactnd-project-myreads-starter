@@ -29,7 +29,12 @@ body, .app {
   flex: 1;
 }
 
+.myshelfs{
+  list-style-type: none;
+}
+
 .bookshelf {
+
   padding: 0 10px 20px;
 }
 
