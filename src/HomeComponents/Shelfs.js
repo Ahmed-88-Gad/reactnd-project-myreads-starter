@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import Book from './Book';
+import Book from '../CommonComponents/Book';
 
 class Shelfs extends Component {
   state = {}
   render() {
-    const { shelfId, shelfTitle, booksInShelf, ChangShelf } = this.props;
+    const { shelfId,
+      shelfTitle, 
+      booksInShelf, 
+      ChangShelf,
+    } = this.props;
+    
+    
     // console.log(booksInShelf);
     // const BookDist = booksInShelf.filter((book) => book.shelf === shelf.shelfId)
     // console.log('BookDist',BookDist);
@@ -21,7 +27,8 @@ class Shelfs extends Component {
                 books={books} 
                 shelfId={shelfId} 
                 shelfTitle={shelfTitle}
-                ChangShelf={ChangShelf}              
+                ChangShelf={ChangShelf} 
+                bookShelf={books.shelf}             
               />
               ))}
             </ol>

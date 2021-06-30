@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class BookShelfChanger extends Component {
   state = {
-    value: this.props.books.shelf
+    value: this.props.bookShelf
   }
   handleChange = event => {
     const { value } = event.target;
@@ -13,10 +13,13 @@ class BookShelfChanger extends Component {
 
   render() {
     // const { books } = this.props
-    console.log(this.state.value);
-    console.log(this.props.books.id);
+    // console.log('books', books.shelf);
     // console.log(this.state.value);
-    // console.log('books', books);
+    // console.log(this.props.ChangShelf);
+    // console.log(this.handleChange);
+    console.log(this.props);
+    console.log(this.state.value);
+
     // console.log(shelfTitle);
     return (
       <div className="book-shelf-changer">

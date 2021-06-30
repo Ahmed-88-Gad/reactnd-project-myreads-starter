@@ -1,32 +1,57 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import SearchPage from './SearchPage';
+import SearchPage from './SearchComponents/SearchPage';
 // import MyShelfs from './MyShelfs';
-import HomePage from './HomePage';
-// import * as BooksAPI from './BooksAPI'
+import HomePage from './HomeComponents/HomePage';
+import * as BooksAPI from './CommonComponents/BooksAPI'
 import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false
+    AllMyBooks:[]
   }
+  componentDidMount() {
+    BooksAPI.getAll()
+      .then(books => {
+        this.setState({
+          AllMyBooks: books
+        })
+    })
+}
+ChangShelf = (book,shelf) =>{
+  BooksAPI.update(book,shelf)    
+      if (shelf === 'none') {
+      this.setState(currentState => ({
+        AllMyBooks: currentState.AllMyBooks.filter(b => b.id !== book.id)
+      }));
+    } 
+    else {
+      book.shelf = shelf;
+      this.setState(currentState => ({
+        AllMyBooks: currentState.AllMyBooks.filter(b => b.id !== book.id).concat(book)
+      }));
+    }
+    
+}
 
   render() {
+    const{AllMyBooks}= this.state;
+    const ChangShelf =this.ChangShelf
+    // console.log(this.state.AllMyBooks);
+    // console.log(AllMyBooks);
     return (
       <div className="app">
         <Route exact path = '/' render = {() => (
           <HomePage
+            AllMyBooks={AllMyBooks}
+            ChangShelf={this.ChangShelf}
             />
           )}
         />
         <Route exact path = '/search' render = {({history}) => (
           <SearchPage 
+          AllMyBooks={AllMyBooks}
+          ChangShelf={ChangShelf}
             />
           )}
         />

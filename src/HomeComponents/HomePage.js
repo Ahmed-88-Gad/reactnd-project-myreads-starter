@@ -6,10 +6,16 @@ import MyShelfs from './MyShelfs';
 class HomePage extends Component {
   state = {  }
   render() { 
+    const{AllMyBooks,ChangShelf}= this.props;
+    // console.log(AllMyBooks)
+
     return ( 
       <div className="list-books">
         <Header />
-        <MyShelfs />
+        <MyShelfs 
+          AllMyBooks={AllMyBooks}
+          ChangShelf={ChangShelf}
+        />
         <div className="open-search">
           <Link to="/search"><button>Add  a book</button></Link>
         </div>

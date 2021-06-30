@@ -1,43 +1,20 @@
 import React, {Component} from 'react';
-import * as BooksAPI from './BooksAPI'
+// import * as BooksAPI from './BooksAPI'
 import Shelfs from './Shelfs';
 
 class MyShelfs extends Component {
   state = { 
-    AllBooks: []
-   }
-  componentDidMount() {
-    BooksAPI.getAll()
-      .then(books => {
-        this.setState({
-          AllBooks: books
-        })
-    })
-}
-ChangShelf = (book,shelf) =>{
-  BooksAPI.update(book,shelf)    
-      if (shelf === 'none') {
-      this.setState(currentState => ({
-        AllBooks: currentState.AllBooks.filter(b => b.id !== book.id)
-      }));
-    } 
-    else {
-      book.shelf = shelf;
-      this.setState(currentState => ({
-        AllBooks: currentState.AllBooks.filter(b => b.id !== book.id).concat(book)
-      }));
-    }
-    
-}
-  render() { 
+    // AllMyBooks: this.props
+  }
+   render() { 
 
-    const {AllBooks} = this.state
-    // console.log(AllBooks);
+    const {AllMyBooks, ChangShelf} = this.props
+    // console.log(AllMyBooks);
     let CurrentlyReadingList = [];
     let WantToReadList = [];
     let ReadList = [];
 
-    AllBooks.forEach(book => {
+    AllMyBooks.forEach(book => {
       switch(book.shelf) {
           case 'currentlyReading':
             CurrentlyReadingList.push(book)
@@ -82,8 +59,7 @@ ChangShelf = (book,shelf) =>{
               shelfTitle={shelf.shelfTitle}
               booksInShelf={shelf.booksInShelf}
               shelfId={shelf.shelfId}
-              AllBooks={AllBooks}
-              ChangShelf={this.ChangShelf}
+              ChangShelf={ChangShelf}
             
             />
           </li>
