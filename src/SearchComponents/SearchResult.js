@@ -7,15 +7,15 @@ const SearchResult = props => {
       if (b.id === book.id) {
         book.shelf = b.shelf;
         // console.log(book.shelf);
-        console.log(b);
+        // console.log(b);
       }
-      console.log(b);
+      // console.log(b);
       return b;
     });
-    console.log(book);
+    // console.log(book);
     return book;
   });
-      console.log(updatedSearchedBooks);
+      // console.log(updatedSearchedBooks);
   return ( 
           <div className="search-books-results">
       <ol className="books-grid">{

@@ -18,6 +18,7 @@ class BooksApp extends React.Component {
         })
     })
 }
+
 ChangShelf = (book,shelf) =>{
   BooksAPI.update(book,shelf)    
       if (shelf === 'none') {
